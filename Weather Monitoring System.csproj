@@ -9,11 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Bots\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Folder Include="BotsService\" />
+	<Folder Include="Configs\" />
+	<Folder Include="DataParsers\" />
+	<Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
