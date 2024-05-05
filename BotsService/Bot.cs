@@ -23,6 +23,8 @@ namespace Weather_Monitoring_System.Bots
             }
         }
 
-        public abstract void Active(WeatherData weatherData);
+        public abstract bool IsActive(WeatherData weatherData);
+
+        public abstract void PrintActiveMessage();
     }
 }
