@@ -10,7 +10,10 @@
 
   <ItemGroup>
     <Folder Include="Bots\" />
-    <Folder Include="DataParsers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
