@@ -9,10 +9,12 @@ namespace Weather_Monitoring_System.Bots
         public RainBotService()
         {
             var config = LoadConfig("RainBot");
-            _rainBotConfig.BotName = config.BotName;
-            _rainBotConfig.Enabled = config.Enabled;
-            _rainBotConfig.Threshold = config.Threshold;
-            _rainBotConfig.Message = config.Message;
+            _rainBotConfig = new RainBotConfig(config.BotName)
+            {
+                Enabled = config.Enabled,
+                Threshold = config.Threshold,
+                Message = config.Message
+            };
         }
 
         public override bool IsActive(WeatherData weatherData)
@@ -22,8 +24,8 @@ namespace Weather_Monitoring_System.Bots
 
         public override void PrintActiveMessage()
         {
-            Console.WriteLine($"{GetType().Name} activated!");
-            Console.WriteLine($"{GetType().Name}: {_rainBotConfig.Message}");
+            Console.WriteLine($"\n{_rainBotConfig.BotName} activated!");
+            Console.WriteLine($"{_rainBotConfig.BotName}: {_rainBotConfig.Message}\n");
         }
     }
 }

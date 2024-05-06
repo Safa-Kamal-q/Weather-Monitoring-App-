@@ -5,7 +5,7 @@ namespace Weather_Monitoring_System.DataParsers
 {
     public class JsonWeatherDataParser : IWeatherDataParser
     {
-        public WeatherData? Parse(string data)
+        public WeatherData? TryParse(string data)
         {
             return JsonConvert.DeserializeObject<WeatherData>(data);
         }

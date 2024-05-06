@@ -4,13 +4,13 @@ using Weather_Monitoring_System.Models;
 
 namespace Weather_Monitoring_System.DataParsers
 {
-    internal class XmlWeatherDataParser : IWeatherDataParser
+    public class XmlWeatherDataParser : IWeatherDataParser
     {
-        public WeatherData Parse(string data)
+        public WeatherData TryParse(string data)
         {
             var serializer = new XmlSerializer(typeof(WeatherData));
 
-            XmlReader reader = XmlReader.Create(new StringReader(data));
+            var reader = XmlReader.Create(new StringReader(data));
 
             return (WeatherData)serializer.Deserialize(reader);
         }

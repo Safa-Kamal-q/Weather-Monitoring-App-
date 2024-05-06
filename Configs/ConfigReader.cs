@@ -3,14 +3,14 @@ using Newtonsoft.Json.Linq;
 
 namespace Weather_Monitoring_System.Configs
 {
-    internal class ConfigReader
+    public class ConfigReader
     {
-        private const string ConfigFilePath = "config.json";
+        private const string ConfigFilePath = "D:\\Weather Monitoring System\\Configs\\config.json";
 
         public static JObject ReadConfig()
         {
-            using StreamReader file = File.OpenText(ConfigFilePath);
-            using JsonTextReader reader = new(file);
+            var file = File.OpenText(ConfigFilePath);
+            var reader = new JsonTextReader(file);
             return JObject.Load(reader);
         }
     }

@@ -8,11 +8,13 @@ namespace Weather_Monitoring_System.Bots
 
         public SunBotService()
         {
-            var config = LoadConfig("RainBot");
-            _sunBotConfig.BotName = config.BotName;
-            _sunBotConfig.Enabled = config.Enabled;
-            _sunBotConfig.Threshold = config.Threshold;
-            _sunBotConfig.Message = config.Message;
+            var config = LoadConfig("SunBot");
+            _sunBotConfig = new SunBotConfig(config.BotName)
+            {
+                Enabled = config.Enabled,
+                Threshold = config.Threshold,
+                Message = config.Message
+            };
         }
 
         public override bool IsActive(WeatherData weatherData)
@@ -22,8 +24,8 @@ namespace Weather_Monitoring_System.Bots
 
         public override void PrintActiveMessage()
         {
-            Console.WriteLine($"{GetType().Name} activated!");
-            Console.WriteLine($"{GetType().Name}: {_sunBotConfig.Message}");
+            Console.WriteLine($"\n{_sunBotConfig.BotName} activated!");
+            Console.WriteLine($"{_sunBotConfig.BotName}: {_sunBotConfig.Message}\n");
         }
     }
 }
