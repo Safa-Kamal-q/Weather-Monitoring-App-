@@ -1,4 +1,6 @@
 ﻿using Weather_Monitoring_System.DataParsers;
+using Weather_Monitoring_System.Services.BotServices;
+using Weather_Monitoring_System.Services.WeatherService;
 
 namespace Weather_Monitoring_System
 {
@@ -11,14 +13,21 @@ namespace Weather_Monitoring_System
 
             var weatherDataInput = Console.ReadLine();
 
+            var botList = new List<BotService>
+            {
+                new RainBotService(),
+                new SnowBotService(),
+                new SunBotService()
+            };
+
             if (weatherDataInput.StartsWith('{'))
             {
-                var weatherService = new WeatherService(new JsonWeatherDataParser());
+                var weatherService = new WeatherService(new JsonWeatherDataParser(), botList);
 
                 try
                 {
                     var weatherDataFromJson = weatherService.ParseToWeatherData(weatherDataInput);
-                    weatherService.AvtivatBots(weatherDataFromJson);
+                    weatherService.PrinActiveMessageIfBotActive(weatherDataFromJson);
 
                 }
                 catch (Exception e)
@@ -29,12 +38,12 @@ namespace Weather_Monitoring_System
             }
             else if (weatherDataInput.StartsWith('<'))
             {
-                var weatherService = new WeatherService(new XmlWeatherDataParser());
+                var weatherService = new WeatherService(new XmlWeatherDataParser(), botList);
 
                 try
                 {
                     var weatherDataFromXML = weatherService.ParseToWeatherData(weatherDataInput);
-                    weatherService.AvtivatBots(weatherDataFromXML);
+                    weatherService.PrinActiveMessageIfBotActive(weatherDataFromXML);
 
                 }
                 catch (Exception e)

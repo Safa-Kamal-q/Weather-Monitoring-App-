@@ -6,13 +6,24 @@ namespace Weather_Monitoring_System.DataParsers
 {
     public class XmlWeatherDataParser : IWeatherDataParser
     {
-        public WeatherData TryParse(string data)
+        public WeatherData? TryParse(string data)
         {
-            var serializer = new XmlSerializer(typeof(WeatherData));
+            try
+            {
+                var serializer = new XmlSerializer(typeof(WeatherData));
 
-            var reader = XmlReader.Create(new StringReader(data));
+                var reader = XmlReader.Create(new StringReader(data));
 
-            return (WeatherData)serializer.Deserialize(reader);
+                return (WeatherData)serializer.Deserialize(reader);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Environment.Exit(1);
+                return null;
+            }
+
         }
     }
 }

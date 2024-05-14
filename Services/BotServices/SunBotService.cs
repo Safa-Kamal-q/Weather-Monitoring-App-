@@ -1,16 +1,17 @@
 ﻿using Weather_Monitoring_System.Models;
 
-namespace Weather_Monitoring_System.Bots
+namespace Weather_Monitoring_System.Services.BotServices
 {
-    public class SunBotService : Bot
+    public class SunBotService : BotService
     {
         private SunBotConfig _sunBotConfig;
 
         public SunBotService()
         {
             var config = LoadConfig("SunBot");
-            _sunBotConfig = new SunBotConfig(config.BotName)
+            _sunBotConfig = new SunBotConfig()
             {
+                BotName = config.BotName,
                 Enabled = config.Enabled,
                 Threshold = config.Threshold,
                 Message = config.Message

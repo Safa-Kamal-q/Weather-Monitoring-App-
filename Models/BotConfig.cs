@@ -4,18 +4,12 @@
     {
         public string BotName { get; set; }
 
-        public bool Enabled { get; set; }
+        public bool Enabled { get; set; } = false;
 
-        public decimal Threshold { get; set; }
+        public decimal Threshold { get; set; } = 0;
 
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
 
-        public BotConfig(string botName, bool enabled = false, decimal threshold = 0, string message = "")
-        {
-            BotName = botName;
-            Enabled = enabled;
-            Threshold = threshold;
-            Message = message;
-        }
+        public BotConfig() { }
     }
 }

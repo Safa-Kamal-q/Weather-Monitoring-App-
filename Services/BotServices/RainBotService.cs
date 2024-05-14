@@ -1,16 +1,17 @@
 ﻿using Weather_Monitoring_System.Models;
 
-namespace Weather_Monitoring_System.Bots
+namespace Weather_Monitoring_System.Services.BotServices
 {
-    public class RainBotService : Bot
+    public class RainBotService : BotService
     {
         private RainBotConfig _rainBotConfig;
 
         public RainBotService()
         {
             var config = LoadConfig("RainBot");
-            _rainBotConfig = new RainBotConfig(config.BotName)
+            _rainBotConfig = new RainBotConfig()
             {
+                BotName = config.BotName,
                 Enabled = config.Enabled,
                 Threshold = config.Threshold,
                 Message = config.Message

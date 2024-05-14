@@ -7,7 +7,17 @@ namespace Weather_Monitoring_System.DataParsers
     {
         public WeatherData? TryParse(string data)
         {
-            return JsonConvert.DeserializeObject<WeatherData>(data);
+            try
+            {
+                return JsonConvert.DeserializeObject<WeatherData>(data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Environment.Exit(1);
+                return null;
+            }
+
         }
     }
 }

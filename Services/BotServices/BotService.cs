@@ -2,9 +2,9 @@
 using Weather_Monitoring_System.Configs;
 using Weather_Monitoring_System.Models;
 
-namespace Weather_Monitoring_System.Bots
+namespace Weather_Monitoring_System.Services.BotServices
 {
-    public abstract class Bot
+    public abstract class BotService
     {
         protected BotConfig? LoadConfig(string botName)
         {
@@ -14,15 +14,21 @@ namespace Weather_Monitoring_System.Bots
 
                 if (config != null && config.TryGetValue(botName, out var botConfig))
                 {
-                    return new BotConfig(botName,
-                                        (bool)botConfig["enabled"],
-                                        (botName == "RainBot") ? (decimal)botConfig["humidityThreshold"] : (decimal)botConfig["temperatureThreshold"],
-                                        botConfig["message"].ToString());
+                    return new BotConfig
+                    {
+                        BotName = botName,
+                        Enabled = (bool)botConfig["enabled"],
+                        Threshold = botName == "RainBot" ? (decimal)botConfig["humidityThreshold"] : (decimal)botConfig["temperatureThreshold"],
+                        Message = botConfig["message"].ToString()
+                    };
                 }
-                else
+                return new BotConfig
                 {
-                    return new BotConfig(botName);
-                }
+                    BotName = botName,
+                    Enabled = false,
+                    Threshold = 0,
+                    Message = string.Empty
+                };
             }
             catch (Exception ex)
             {
