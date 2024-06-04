@@ -2,7 +2,7 @@
 
 namespace Weather_Monitoring_System.Services.BotServices
 {
-    public class RainBotService : BotService
+    public class RainBotService : BotService, IBotService
     {
         private RainBotConfig _rainBotConfig;
 
@@ -18,12 +18,12 @@ namespace Weather_Monitoring_System.Services.BotServices
             };
         }
 
-        public override bool IsActive(WeatherData weatherData)
+        public bool IsActive(WeatherData weatherData)
         {
             return _rainBotConfig.Enabled && weatherData.Humidity > _rainBotConfig.Threshold;
         }
 
-        public override void PrintActiveMessage()
+        public void PrintActiveMessage()
         {
             Console.WriteLine($"\n{_rainBotConfig.BotName} activated!");
             Console.WriteLine($"{_rainBotConfig.BotName}: {_rainBotConfig.Message}\n");

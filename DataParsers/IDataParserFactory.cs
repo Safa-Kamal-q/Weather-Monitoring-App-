@@ -2,8 +2,8 @@
 
 namespace Weather_Monitoring_System.DataParsers
 {
-    public interface IWeatherDataParser
+    public interface IDataParserFactory
     {
-        bool TryParse(string data, out WeatherData? weatherData);
+        public WeatherData? TryParseToWeatherData();
     }
 }

@@ -5,19 +5,20 @@ namespace Weather_Monitoring_System.DataParsers
 {
     public class JsonWeatherDataParser : IWeatherDataParser
     {
-        public WeatherData? TryParse(string data)
+        public bool TryParse(string data, out WeatherData? weatherData)
         {
+            weatherData = null;
+
             try
             {
-                return JsonConvert.DeserializeObject<WeatherData>(data);
+                weatherData = JsonConvert.DeserializeObject<WeatherData>(data);
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Environment.Exit(1);
-                return null;
+                return false;
             }
-
         }
     }
 }

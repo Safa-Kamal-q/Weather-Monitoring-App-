@@ -36,11 +36,6 @@ namespace Weather_Monitoring_System.Services.BotServices
                 Environment.Exit(1);
                 return null;
             }
-
         }
-
-        public abstract bool IsActive(WeatherData weatherData);
-
-        public abstract void PrintActiveMessage();
     }
 }
