@@ -4,8 +4,10 @@ namespace Weather_Monitoring_System.Services.BotServices
 {
     public interface IBotService
     {
-        public abstract bool IsActive(WeatherData weatherData);
+        public bool IsActive(WeatherData weatherData);
 
-        public abstract void PrintActiveMessage();
+        public void PrintActiveMessage();
+
+        public void PrintActiveMessageIfBotActive(WeatherData weatherData);
     }
 }

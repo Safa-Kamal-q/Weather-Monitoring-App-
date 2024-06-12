@@ -48,7 +48,16 @@ namespace Weather_Monitoring_System
                         else
                         {
                             _parserFactory = new DataParserFactory(weatherDataInput);
-                            _weatherData = _parserFactory.TryParseToWeatherData();
+                            _parserFactory.TryParseInputToJsonOrXml(out IWeatherDataParser dataParser);
+
+                            if (dataParser == null)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("\nInvalid format input, please try again\n");
+                                continue;
+                            }
+
+                            dataParser.TryParse(weatherDataInput, out _weatherData);
 
                             if (_weatherData == null)
                             {

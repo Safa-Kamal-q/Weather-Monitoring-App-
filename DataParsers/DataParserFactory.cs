@@ -1,32 +1,36 @@
-﻿using Weather_Monitoring_System.Models;
-
-namespace Weather_Monitoring_System.DataParsers
+﻿namespace Weather_Monitoring_System.DataParsers
 {
-    public class DataParserFactory: IDataParserFactory
+    public class DataParserFactory : IDataParserFactory
     {
         private string _weatherDataInput;
-        private IWeatherDataParser _dataParser;
 
         public DataParserFactory(string weatherDataInput)
         {
             _weatherDataInput = weatherDataInput;
         }
 
-        public WeatherData? TryParseToWeatherData()
+        public bool TryParseInputToJsonOrXml(out IWeatherDataParser? dataParser)
         {
-            WeatherData? weatherData = null;
+            dataParser = null;
 
-            if (_weatherDataInput.StartsWith('{'))
+            try
             {
-                _dataParser = new JsonWeatherDataParser();
-                _dataParser.TryParse(_weatherDataInput, out weatherData);
+                if (_weatherDataInput.StartsWith('{'))
+                {
+                    dataParser = new JsonWeatherDataParser();
+                }
+                else if (_weatherDataInput.StartsWith('<'))
+                {
+                    dataParser = new XmlWeatherDataParser();
+                }
+                return true;
+
             }
-            else if (_weatherDataInput.StartsWith('<'))
+            catch (Exception ex)
             {
-                _dataParser = new XmlWeatherDataParser();
-                _dataParser.TryParse(_weatherDataInput, out weatherData);
+                Console.WriteLine(ex.Message);
+                return false;
             }
-            return weatherData;
         }
     }
 }

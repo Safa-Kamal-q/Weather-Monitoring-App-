@@ -16,10 +16,7 @@ namespace Weather_Monitoring_System.Services.WeatherService
         {
             foreach (var botService in _botServices)
             {
-                if (botService.IsActive(weatherData))
-                {
-                    botService.PrintActiveMessage();
-                }
+                botService.PrintActiveMessageIfBotActive(weatherData);
             }
         }
     }

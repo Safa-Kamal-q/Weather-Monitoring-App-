@@ -28,5 +28,13 @@ namespace Weather_Monitoring_System.Services.BotServices
             Console.WriteLine($"\n{_snowBotConfig.BotName} activated!");
             Console.WriteLine($"{_snowBotConfig.BotName}: {_snowBotConfig.Message}\n");
         }
+
+        public void PrintActiveMessageIfBotActive(WeatherData weatherData)
+        {
+            if (IsActive(weatherData))
+            {
+                PrintActiveMessage();
+            }
+        }
     }
 }
